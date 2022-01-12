@@ -1,0 +1,68 @@
+CREATE TABLE IF NOT EXISTS `perf-api`.`UserTypeR` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `uuid` VARCHAR(255) NOT NULL DEFAULT (uuid()),
+  `name` VARCHAR(255) NOT NULL,  
+  `status` BIT NOT NULL DEFAULT 1,
+  `createdby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `created` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  `modifiedby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `modified` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  PRIMARY KEY (`id`));
+
+INSERT INTO UserTypeR(name, status) VALUES ('user', 1);
+INSERT INTO UserTypeR(name, status) VALUES ('api', 1);
+
+SELECT * FROM UserTypeR;
+
+CREATE TABLE IF NOT EXISTS `perf-api`.`Users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `uuid` VARCHAR(255) NOT NULL DEFAULT (uuid()),
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `usertypeid` INT NOT NULL DEFAULT 1,
+  `status` BIT NOT NULL DEFAULT 1,
+  `createdby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `created` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  `modifiedby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `modified` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (usertypeid)
+	REFERENCES UserTypeR (id)
+    ON UPDATE RESTRICT ON DELETE CASCADE
+  );
+
+ALTER TABLE `perf-api`.`Users` 
+ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE;
+;
+  
+CREATE TABLE IF NOT EXISTS `perf-api`.`Teams` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `uuid` VARCHAR(255) NOT NULL DEFAULT (uuid()),
+  `name` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `teamInfo` LONGTEXT NULL,
+  `status` BIT NOT NULL DEFAULT 1,
+  `createdby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `created` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  `modifiedby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `modified` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  PRIMARY KEY (`id`));
+  
+CREATE TABLE IF NOT EXISTS `perf-api`.`UserTeams` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `uuid` VARCHAR(255) NOT NULL DEFAULT (uuid()),
+  `userid` INT NOT NULL,
+  `teamid` INT NOT NULL,  
+  `status` BIT NOT NULL DEFAULT 1,
+  `createdby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `created` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  `modifiedby` VARCHAR(255) NOT NULL DEFAULT ('system'),
+  `modified` TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (userid)
+	REFERENCES Users (id)
+    ON UPDATE RESTRICT ON DELETE CASCADE,
+  FOREIGN KEY (teamid)
+	REFERENCES Teams (id)
+    ON UPDATE RESTRICT ON DELETE CASCADE);
