@@ -1,0 +1,26 @@
+# FROM ubuntu:22.04
+FROM locustio/locust:2.5.0
+COPY agentService.sh .
+RUN touch onStart.txt
+RUN chmod 775 onStart.txt
+RUN touch statusreport.txt
+RUN chmod 775 statusreport.txt
+RUN touch agentstatus.txt
+RUN chmod 775 agentstatus.txt
+
+# RUN find . -type f -exec chmod 775 {} \;
+RUN ls -ltr
+ENTRYPOINT ["/bin/bash", "agentService.sh"]
+ #http://127.0.0.1:8080"]
+
+# Build
+# docker build -f dockerfile -t liv/perf:agent .
+
+# Run
+# docker run -it --network=perfnetwork --name perfagent1 liv/perf:agent
+# Detached
+# docker run -d --network=perfnetwork --name perfagent1 liv/perf:agent
+# docker run --network=perfnetwork --name perfagent1 liv/perf:agent
+# docker run --network=perfnetwork --name perfagent1 liv/perf:agent "http://172.18.0.3:8080"
+
+# docker run --network=perfnetwork --name perfagent1 liv/perf:agent "http://perfapi:8080"
