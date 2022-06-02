@@ -1,0 +1,47 @@
+version: "3"
+services:
+  jmeter-master:
+    image : POD/perf-jmeter:5.4.3.1a
+    container_name: jmeter-master
+    env_file:
+      - .env
+    environment:
+      - JMX=${JMX}
+      - XMX=256m
+      - XMS=256m
+      - host=${host}
+      - port=${port}
+      - protocol=${protocol}
+      - threads=${threads}
+      - duration=${duration}
+      - rampup=${rampup}
+      - nbInjector=${nbInjector}
+    volumes:
+      - ./scenario:/scenario
+      - ./data:/data
+      - ./log:/opt/jmeter/logs
+      - ./report:/opt/jmeter/results
+      - ./log:/temp/
+    depends_on: 
+      - jmeter-slave
+  jmeter-slave:
+    image: POD/perf-jmeter:5.4.3.1a
+    env_file:
+      - .env
+    environment:
+      - JMX=${JMX}
+      - XMX=${XMX}
+      - XMS=${XMS}
+      - host=${host}
+      - port=${port}
+      - protocol=${protocol}
+      - threads=${threads}
+      - duration=${duration}
+      - rampup=${rampup}
+      - SLAVE=1
+      - nbInjector=${nbInjector}
+    volumes:
+      - ./scenario:/scenario
+      - ./data:/data
+      - ./log:/opt/jmeter/logs
+
