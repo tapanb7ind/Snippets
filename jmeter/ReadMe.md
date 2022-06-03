@@ -1,5 +1,6 @@
 ## Build Image
-Build using the command [docker build -f Dockerfile -t pod/perf-jmeter:5.4.3.1a .]
+Build using the command
+```docker build -f Dockerfile -t pod/perf-jmeter:5.4.3.1a .```
 
 ## Test Execution
 1. Execute test using the following command
