@@ -3,8 +3,9 @@
 TOOL="jmeter"
 TOOL_VERSION="5.4.3.1a"
 CONTAINER_NAME="jmeter"
-DOCKER_IMAGE="POD/jmeter:5.4.3.1a"
+DOCKER_IMAGE="pod/${TOOL}:${TOOL_VERSION}"
 DOCKER_COMPOSE="docker-compose-custom.yml"
+
 JMETER_CONFIG_XMX=1g
 JMETER_CONFIG_XMS=1g
 TEST_PARAM_HOST="gorest.co.in"
@@ -24,7 +25,7 @@ STAGE="Test-Environment"
 
 S3KEY=""
 S3SECRET=""
-S3_BUCKET="S3-Bucket-Name[Invalid]"
+S3_BUCKET="performanceengineering"
 
 # Thresholds
 MAX_USERS_ALLOWED=30
