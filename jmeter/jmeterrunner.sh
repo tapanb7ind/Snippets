@@ -1,10 +1,10 @@
 #!/bin/bash
 
 TOOL="jmeter"
-TOOL_VERSION="5.4.3.1c"
+TOOL_VERSION="5.4.3.1a"
 CONTAINER_NAME="jmeter"
-DOCKER_IMAGE="POD/perf-jmeter:5.4.3.1a"
-DOCKER_COMPOSE="docker-compose.yml"
+DOCKER_IMAGE="POD/jmeter:5.4.3.1a"
+DOCKER_COMPOSE="docker-compose-custom.yml"
 JMETER_CONFIG_XMX=1g
 JMETER_CONFIG_XMS=1g
 TEST_PARAM_HOST="gorest.co.in"
