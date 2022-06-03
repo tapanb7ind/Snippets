@@ -1,7 +1,7 @@
 version: "3"
 services:
   jmeter-master:
-    image : POD/perf-jmeter:5.4.3.1a
+    image : pod/jmeter:5.4.3.1a
     container_name: jmeter-master
     env_file:
       - .env
@@ -25,7 +25,7 @@ services:
     depends_on: 
       - jmeter-slave
   jmeter-slave:
-    image: POD/perf-jmeter:5.4.3.1a
+    image: pod/jmeter:5.4.3.1a
     env_file:
       - .env
     environment:
