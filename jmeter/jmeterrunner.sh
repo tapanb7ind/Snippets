@@ -4,7 +4,7 @@ TOOL="jmeter"
 TOOL_VERSION="5.4.3.1a"
 CONTAINER_NAME="jmeter"
 DOCKER_IMAGE="pod/${TOOL}:${TOOL_VERSION}"
-DOCKER_COMPOSE="docker-compose-custom.yml"
+DOCKER_COMPOSE="docker-compose.yml"
 
 JMETER_CONFIG_XMX=1g
 JMETER_CONFIG_XMS=1g
