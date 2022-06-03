@@ -40,4 +40,4 @@ ENV HOME /opt/jmeter/
 
 
 # Instructions
-# Build using the command [docker build -f Dockerfile -t pod/perf-jmeter:5.4.3.1a .]
+# Build using the command [docker build -f Dockerfile -t pod/jmeter:5.4.3.1a .]
